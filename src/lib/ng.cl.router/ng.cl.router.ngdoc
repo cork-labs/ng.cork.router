@@ -1,0 +1,15 @@
+@ngdoc overview
+@name ng.cl.router
+@description
+
+AngularJS $router wrapper, provides navigation helpers.
+
+Configure the {@link ng.cl.router.clRouter service} by invoking `configure()` on the {@link ng.cl.router.clRouterProvider provider}
+during the config phase of your app.
+
+<pre>
+angular.module('app', ['my-module'])
+.config(['clRouterProvider', function (clRouterProvider) {
+    clRouterProvider.configure(....);
+}])
+</pre>
