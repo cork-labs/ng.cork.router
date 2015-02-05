@@ -1,8 +1,9 @@
 # ng.cl.router
 [![Build Status: Linux](http://img.shields.io/travis/cork-labs/ng.cl.router/master.svg?style=flat-square)](https://travis-ci.org/cork-labs/ng.cl.router)
-[![Bower version](http://img.shields.io/bower/v/ng.cl.router?style=flat-square)](git@github.com:cork-labs/ng.cl.router.git)
+[![Bower version](http://img.shields.io/bower/v/ng.cl.router.svg?style=flat-square)](git@github.com:cork-labs/ng.cl.router.git)
 
 > AngularJS $router wrapper, provides navigation helpers.
+
 
 ## Getting Started
 
@@ -29,17 +30,49 @@ Include the JS/CSS/assets in your build.
 Checkout the [full documentation](https://github.com/cork-labs/ng.cl.router).
 
 
+## Contributing
+
+We'd love for you to contribute to our source code and to make it even better than it is today!
+
+Make sure you read the [Contributing Guide](CONTRIBUTING.md) first.
+
+
 ## Developing
 
+Clone this repository, install the dependencies and simply run `grunt develop`.
+
 ```
-$ sudo npm install -g grunt-cli bower
+$ npm install -g grunt-cli bower
 $ npm install
 $ bower install
 $ ./bootstrap.sh
 $ grunt develop
 ```
 
-## [MIT](LICENSE)
+At this point, the source examples included were built into the `build/` directory and a simple webserver is launched so
+that you can browse the documentation, the examples and the code coverage.
+
+```
+...
+Running "serve:build" (serve) task
+Started connect web server on http://0.0.0.0:8000
+
+Running "watch" task
+Waiting...
+```
+
+More info on the (Grunt based) tools can be found in the
+[boilerplate documentation](http://jarvis.cork-labs.org/nglib-boilerplate/current/docs).
+
+
+## Authors
+
+**Andre Torgal (andrezero)**
++ <https://twitter.com/andrezero>
++ <http://github.com/andrezero>
+
+
+## [MIT License](LICENSE)
 
 [Copyright (c) 2005 Cork Labs](http://cork-labs.mit-license.org/2015)
 
