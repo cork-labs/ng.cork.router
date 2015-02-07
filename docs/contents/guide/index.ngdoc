@@ -65,12 +65,16 @@ More info on the (Grunt based) tools can be found in the
 [boilerplate documentation](http://jarvis.cork-labs.org/boilerplate-nglib/current/docs).
 
 
-
 ## Authors
 
 **Andre Torgal (andrezero)**
 + <https://twitter.com/andrezero>
 + <http://github.com/andrezero>
+
+
+## Acknowledgements
+
+Based on the groovy ideas of [Jaime Beneytez](https://github.com/JaimeBeneytez).
 
 
 ## MIT License
