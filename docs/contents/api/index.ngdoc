@@ -4,6 +4,11 @@
 
 # ng.cl.router API Reference
 
-Welcome to the **ng.cl.router** API reference.
+> Welcome to the **ng.cl.router** API reference.
 
-If you want to know how **ng.cl.router** works, checkout the {@link guide/ guide} and the {@link demos/ demos}
+If you want to know how **ng.cl.router** works, checkout the {@link guide/ guide} and the {@link demos/ demos}.
+
+
+## Modules
+
+- **[ng.cl.router](#/api/ng.cl.router)** - AngularJS $router wrapper, provides navigation helpers.

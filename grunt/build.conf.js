@@ -167,7 +167,8 @@ module.exports = function (grunt, data) {
 
                 // scripts stylesheets and examples
                 examplesScripts: [
-                    'vendor/angular/angular.js',
+                    '<%= paths.vendor %>/angular/angular.js',
+                    '<%= paths.vendor %>/angular-route/angular-route.js',
                     'src/lib/<%= vars.ngNamespace %>/<%= vars.ngNamespace %>.js',
 
                 ],

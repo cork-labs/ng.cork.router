@@ -7,10 +7,16 @@
 
     /**
      * @ngdoc object
-     * @name clRouterProvider
+     * @name ng.cl.router.clRouterProvider
+     *
+     * @dependencies
+     * - ngRoute
      *
      * @description
-     * Allows the {@link clRouter} service to be configured.
+     * Allows the {@link clRouter} service to be configured and routes to be registered in `$routeProvider` during the
+     * config phase of your application.
+     *
+     * @property {Object} $routeProvider Reference to AngularJS `$routeProvider` provider. Avoids having to inject both `clRouterProvider` and `$routeProvider` in case you need some underlying feature like `$route.current`.
      */
     module.provider('clRouter', [
         '$routeProvider',
@@ -24,7 +30,7 @@
             /**
              * Adds a route with $routeProvider and registers the route in the map.
              * @param {string} route  The route name.
-             * @param {object} config The $routeProvider object, extended with `pattern` and optional `link`.
+             * @param {object} config The $routeProvider object, extended with a `path` attribute.
              */
             var addRoute = function (route, config) {
 
@@ -42,8 +48,8 @@
 
                 var options = angular.copy(config);
 
-                if (!angular.isString(options.pattern) || !options.pattern.length) {
-                    throw new Error('Invalid pattern "' + options.pattern + '" in route "' + route + '".');
+                if (!angular.isString(options.path) || !options.path.length) {
+                    throw new Error('Invalid path "' + options.path + '" in route "' + route + '".');
                 }
 
                 // add name and location
@@ -52,8 +58,8 @@
                 routeMap[route] = options;
 
                 // register the route
-                if (options.template || options.templateUrl || options.controller) {
-                    $routeProvider.when(options.pattern, options);
+                if (options.controller || options.template || options.templateUrl) {
+                    $routeProvider.when(options.path, options);
                 }
             };
 
@@ -70,13 +76,14 @@
             };
 
             /**
-             * Parser for the url, it builds the url with the parameters provided
+             * Builds the url with the provided parameters.
              * @param {string}  route
              * @param {object=} params
+             * @returns {string}
              */
             var getURL = function (route, params) {
 
-                var url = getRoute(route).pattern;
+                var url = getRoute(route).path;
                 var hasParam;
                 var regexp;
                 var replace;
@@ -109,90 +116,105 @@
 
             /**
              * @ngdoc method
-             * @name clRouterProvider#addRoute
+             * @name addRoute
+             * @methodOf ng.cl.router.clRouterProvider
              *
              * @description
              * Registers the route in both angular `$routeProvider` and the {@link clRouterProvider} provider.
              *
              * @param {string} route  The route name.
-             * @param {object} config The $routeProvider object, extended with `pattern` and optional `link`.
+             * @param {object} config The $routeProvider object, extended with a `path` attribute that corresponds to the `path` argument to {@link https://docs.angularjs.org/api/ngRoute/provider/$routeProvider#when $routeProvider:when()}.
              */
             this.addRoute = addRoute;
 
             /**
              * @ngdoc method
-             * @name clRouterProvider#getRoute
+             * @name getRoute
+             * @methodOf ng.cl.router.clRouterProvider
              *
              * @description
              * Returns the route configuration.
              *
-             * @param {string}  route  The name of the route.
+             * @param {string}  route The name of the route.
+             *
+             * @returns {object} The requested route object.
              */
             this.getRoute = getRoute;
 
             /**
              * @ngdoc method
-             * @name clRouterProvider#getRoute
+             * @name getRoute
+             * @methodOf ng.cl.router.clRouterProvider
              *
              * @description
              * Returns the route configuration.
              *
              * @param {string}  route  The name of the route.
-             * @param {object=} params The route params.
+             * @param {object=} params The route params. Must include vaues for all mandatory `:params`.
+             *
+             * @returns {string} The route path interpolated with the provided param values.
              */
             this.getURL = getURL;
 
+            this.$routeProvider = $routeProvider;
+
             /**
              * @ngdoc service
-             * @name clRouter
+             * @name ng.cl.router.clRouter
              *
              * @description
-             * Provides methods to build route URLs and navigation helpers.
+             * Provides methods to build and retrieive route paths and a navigation helper to trigger route changes by name.
+             *
+             * @property {Object} $route  Reference to AngularJS `$route` service. Avoids having to inject both `clRouter` and `$route` in case you need some underlying feature like `$route.current`.
+             * @property {Object} $params Reference to AngularJS `$routeParams` service. Avoids having to inject both `clRouter` and `$routeParams`.
              */
             this.$get = [
                 '$route',
+                '$routeParams',
                 '$location',
-                function clRouterFactory($route, $location) {
+                function clRouter($route, $routeParams, $location) {
 
-                    /**
-                     * parses
-                     */
-                    var parser = document.createElement('a');
-
-                    var api = {
+                    var serviceApi = {
 
                         /**
                          * @ngdoc method
-                         * @name clRouter#addRoute
+                         * @name addRoute
+                         * @methodOf ng.cl.router.clRouter
                          *
                          * @description
                          * Registers the route in both angular `$routeProvider` and the {@link clRouterProvider} provider.
                          *
-                         * @param {string}  route  The route name.
-                         * @param {object=} params The route params.
+                         * @param {string}  route  The name of the route.
+                         * @param {object} config The $routeProvider object, extended with a `path` attribute that corresponds to the `path` argument to {@link https://docs.angularjs.org/api/ngRoute/provider/$routeProvider#when $routeProvider:when()}.
                          */
                         addRoute: addRoute,
 
                         /**
                          * @ngdoc method
-                         * @name clRouter#getRoute
+                         * @name getRoute
+                         * @methodOf ng.cl.router.clRouter
                          *
                          * @description
                          * Returns the route configuration.
                          *
-                         * @param {string}  route  The route name.
+                         * @param {string} route The name of the route.
+                         *
+                         * @returns {object} The requested route object.
                          */
                         getRoute: getRoute,
 
                         /**
                          * @ngdoc method
-                         * @name clRouter#getURL
+                         * @name getURL
+                         * @methodOf ng.cl.router.clRouter
                          *
                          * @description
                          * Builds the URL for a route, given the provided params.
                          *
                          * @param {string}  route  The name of the route.
-                         * @param {object=} params The route params.
+                         * @param {object=} params The route params. Must include vaues for all mandatory `:params`.
+                         *
+                         * @returns {string} The route path interpolated with the provided param values.
                          */
                         getURL: function (route, params) {
                             return getURL(route, params);
@@ -200,26 +222,25 @@
 
                         /**
                          * @ngdoc method
-                         * @name clRouter#gotoRoute
+                         * @name goTo
+                         * @methodOf ng.cl.router.clRouter
                          *
                          * @description
                          * Navigates to a route, given the provided params and
                          *
                          * @param {string}  route  The name of the route.
-                         * @param {object=} params The route params.
+                         * @param {object=} params The route params. Must include vaues for all mandatory `:params`.
                          */
-                        gotoRoute: function (route, params) {
+                        goTo: function (route, params) {
                             return $location.url(getURL(route, params));
                         }
                     };
 
-                    Object.defineProperty(api, '$route', {
-                        get: function () {
-                            return $route;
-                        }
-                    });
+                    serviceApi.$route = $route;
 
-                    return api;
+                    serviceApi.$params = $routeParams;
+
+                    return serviceApi;
                 }
             ];
 

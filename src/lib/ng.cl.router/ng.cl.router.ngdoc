@@ -2,14 +2,40 @@
 @name ng.cl.router
 @description
 
-AngularJS $router wrapper, provides navigation helpers.
+> AngularJS $router wrapper, provides navigation helpers.
 
-Configure the {@link ng.cl.router.clRouter service} by invoking `configure()` on the {@link ng.cl.router.clRouterProvider provider}
+# Dependencies
+
+- Service `ngRoute`, provided by [bower:angular-route](https://github.com/angular/bower-angular-route)
+
+
+# Usage
+
+## clRouter Service Configuration
+
+Configure the {@link ng.cl.router.clRouter clRouter} by invoking `configure()` on the {@link ng.cl.router.clRouterProvider clRouterProvider}.
 during the config phase of your app.
 
 <pre>
-angular.module('app', ['my-module'])
+angular.module('someModule', ['ng.cl.router'])
 .config(['clRouterProvider', function (clRouterProvider) {
-    clRouterProvider.configure(....);
+    clRouterProvider.addRoute('foo', {
+        pattern: '/foo/:id',
+        controller: 'fooController'
+    });
 }])
 </pre>
+
+
+
+## clRouter Service
+
+Use the {@link ng.cl.router.clRouter clRouter} service by injecting it into your controllers or services.
+
+<pre>
+angular.module('someModule', ['ng.cl.router'])
+.controller('someController', ['clRouter', function (clRouter) {
+    clRouter.goTo('foo', {id: 42});
+}])
+</pre>
+

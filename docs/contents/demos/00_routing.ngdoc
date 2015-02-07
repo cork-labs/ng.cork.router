@@ -1,0 +1,51 @@
+@ngdoc overview
+@name Routing
+@description
+
+## Routing
+
+In this example we will add a couple of **named** routes to `$routeProvider` via the `clRouterProvider` wrapper.
+
+<doc:example module="exampleApp" height="200">
+    <doc:source>
+        <script>
+            angular.module('exampleApp', ['ngRoute', 'ng.cl.router'])
+            .config(['$locationProvider', 'clRouterProvider', function ($locationProvider, clRouterProvider) {
+                //$locationProvider.html5Mode(false);
+                clRouterProvider.addRoute('foo', {
+                    path: '/foo',
+                    controller: 'fooCtrl',
+                    template: 'welcome to foo'
+                });
+                clRouterProvider.addRoute('bar', {
+                    path: '/bar/:id',
+                    controller: 'barCtrl',
+                    template: 'welcome to bar {{id}}'
+                });
+            }])
+            .controller('exampleCtrl', ['$scope', 'clRouter', function ($scope, clRouter) {
+                $scope.router = clRouter;
+                $scope.goToBar = function () {
+                    clRouter.goTo('bar', {id: $scope.id});
+                }
+            }])
+            .controller('fooCtrl', ['$scope', 'clRouter', function ($scope, clRouter) {
+                // ... controller code
+            }])
+            .controller('barCtrl', ['$scope', 'clRouter', function ($scope, clRouter) {
+                // ... controller code
+                $scope.id = clRouter.$params.id;
+            }]);
+        </script>
+        <style>
+            .container {
+                padding: 10px;
+            }
+        </style>
+        <div data-ng-controller="exampleCtrl" class="container">
+            <p>Go to route <button ng-click="router.goTo('foo')">/foo</button><p>
+            <p>Go to route <button ng-click="goToBar()">/bar/:id</button> with id: <input type="text" ng-model="id" /><p>
+        </div>
+        <div ng-view class="container"></div>
+    </doc:source>
+</doc:example>
