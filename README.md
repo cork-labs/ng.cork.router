@@ -27,9 +27,9 @@ Include the following JS files in your build:
 
 ## Documentation
 
-Make sure to check the [official documentation]((http://jarvis.cork-labs.org/ng.cl.router/current/docs) where you can find a
-[guide]((http://jarvis.cork-labs.org/ng.cl.router/current/docs/#/guide), a few [demos]((http://jarvis.cork-labs.org/ng.cl.router/current/docs/#/demos) and the complete
-[API reference]((http://jarvis.cork-labs.org/ng.cl.router/current/docs/#/docs).
+Make sure to check the [official documentation](http://jarvis.cork-labs.org/ng.cl.router/current/docs) where you can find a
+[guide](http://jarvis.cork-labs.org/ng.cl.router/current/docs/#/guide), a few [demos](http://jarvis.cork-labs.org/ng.cl.router/current/docs/#/demos) and the complete
+[API reference](http://jarvis.cork-labs.org/ng.cl.router/current/docs/#/docs).
 
 
 ## Contributing
