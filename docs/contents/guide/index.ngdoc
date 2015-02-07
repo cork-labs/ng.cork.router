@@ -5,14 +5,30 @@
 # ng.cl.router
 
 [![Build Status: Linux](http://img.shields.io/travis/cork-labs/ng.cl.router/master.svg?style=flat-square)](https://travis-ci.org/cork-labs/ng.cl.router)
+[![Bower version](http://img.shields.io/bower/v/ng.cl.router.svg?style=flat-square)](https://github.com/cork-labs/ng.cl.router)
 
 > AngularJS $router wrapper, provides navigation helpers
 
+
 ## Getting Started
+
+Add **ng.cl.router** to you project.
+
+Via bower:
 
 ```
 $ bower install --save ng.cl.router
 ```
+
+Via npm:
+
+```
+$ npm install --save ng.cl.router
+```
+
+Include the following JS files in your build:
+- `dist/ng.cl.router.js` OR `dist/ng.cl.router.min.js`
+
 
 ## Contributing
 
@@ -46,7 +62,7 @@ Waiting...
 ```
 
 More info on the (Grunt based) tools can be found in the
-[boilerplate documentation](http://jarvis.cork-labs.org/nglib-boilerplate/current/docs).
+[boilerplate documentation](http://jarvis.cork-labs.org/boilerplate-nglib/current/docs).
 
 
 
