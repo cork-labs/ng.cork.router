@@ -13,8 +13,8 @@
 
 ## clRouter Service Configuration
 
-Configure the {@link ng.cl.router.clRouter clRouter} by invoking `configure()` on the {@link ng.cl.router.clRouterProvider clRouterProvider}.
-during the config phase of your app.
+Configure the {@link ng.cl.router.clRouter clRouter} service by invoking `configure()` on the {@link ng.cl.router.clRouterProvider clRouterProvider}
+provider during the config phase of your app.
 
 <pre>
 angular.module('someModule', ['ng.cl.router'])
