@@ -1,5 +1,5 @@
 /**
- * ng.cl.router - v0.0.1 - 2015-02-07
+ * ng.cl.router - v0.0.3 - 2015-02-09
  * https://github.com/cork-labs/ng.cl.router
  *
  * Copyright (c) 2015 Cork Labs <http://cork-labs.org>
@@ -20,7 +20,7 @@
      * - ngRoute
      *
      * @description
-     * Allows the {@link clRouter} service to be configured and routes to be registered in `$routeProvider` during the
+     * Allows the {@link ng.cl.router.clRouter clRouter} service to be configured and routes to be registered in `$routeProvider` during the config phase of the application.
      * config phase of your application.
      *
      * @property {Object} $routeProvider Reference to AngularJS `$routeProvider` provider. Avoids having to inject both `clRouterProvider` and `$routeProvider` in case you need some underlying feature like `$route.current`.
@@ -127,7 +127,7 @@
              * @methodOf ng.cl.router.clRouterProvider
              *
              * @description
-             * Registers the route in both angular `$routeProvider` and the {@link clRouterProvider} provider.
+             * Registers the route in both angular `$routeProvider` and the {@link ng.cl.router.clRouterProvider clRouterProvider} provider.
              *
              * @param {string} route  The route name.
              * @param {object} config The $routeProvider object, extended with a `path` attribute that corresponds to the `path` argument to {@link https://docs.angularjs.org/api/ngRoute/provider/$routeProvider#when $routeProvider:when()}.
