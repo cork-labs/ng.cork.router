@@ -1,5 +1,5 @@
 /**
- * ng.cl.router - v0.0.3 - 2015-02-09
+ * ng.cl.router - v0.0.4 - 2015-02-10
  * https://github.com/cork-labs/ng.cl.router
  *
  * Copyright (c) 2015 Cork Labs <http://cork-labs.org>

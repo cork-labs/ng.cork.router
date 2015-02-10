@@ -15,12 +15,6 @@ Via bower:
 $ bower install --save ng.cl.router
 ```
 
-Via npm:
-
-```
-$ npm install --save ng.cl.router
-```
-
 Include the following JS files in your build:
 - `dist/ng.cl.router.js` OR `dist/ng.cl.router.min.js`
 
