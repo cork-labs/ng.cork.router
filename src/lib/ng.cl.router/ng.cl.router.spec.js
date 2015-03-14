@@ -18,14 +18,14 @@ describe('ng.cl.router', function () {
             it('should throw an error if name is missing.', function () {
                 expect(function () {
                     clRouterProvider.addRoute();
-                }).toThrow('Invalid route name "undefined".');
+                }).toThrow(new Error('Invalid route name "undefined".'));
             });
 
             it('should throw an error if name is invalid.', function () {
                 var route = {};
                 expect(function () {
                     clRouterProvider.addRoute(route);
-                }).toThrow('Invalid route name "' + route + '".');
+                }).toThrow(new Error('Invalid route name "' + route + '".'));
             });
 
             it('should throw an error if route has a repeated name.', function () {
@@ -35,7 +35,7 @@ describe('ng.cl.router', function () {
                         path: '/foo'
                     });
                     clRouterProvider.addRoute(route);
-                }).toThrow('Duplicate route "' + route + '".');
+                }).toThrow(new Error('Duplicate route "' + route + '".'));
             });
 
             it('should throw an error if config is invalid.', function () {
@@ -43,7 +43,7 @@ describe('ng.cl.router', function () {
                 var config = 'bar';
                 expect(function () {
                     clRouterProvider.addRoute(route, config);
-                }).toThrow('Invalid config "' + config + '" in route "' + route + '".');
+                }).toThrow(new Error('Invalid config "' + config + '" in route "' + route + '".'));
             });
 
             it('should throw an error if path is missing.', function () {
@@ -51,7 +51,7 @@ describe('ng.cl.router', function () {
                 var path;
                 expect(function () {
                     clRouterProvider.addRoute(route, {});
-                }).toThrow('Invalid path "' + path + '" in route "' + route + '".');
+                }).toThrow(new Error('Invalid path "' + path + '" in route "' + route + '".'));
             });
 
             it('should throw an error if path is invalid.', function () {
@@ -61,7 +61,7 @@ describe('ng.cl.router', function () {
                     clRouterProvider.addRoute(route, {
                         path: path
                     });
-                }).toThrow('Invalid path "' + path + '" in route "' + route + '".');
+                }).toThrow(new Error('Invalid path "' + path + '" in route "' + route + '".'));
             });
         });
 
@@ -113,7 +113,7 @@ describe('ng.cl.router', function () {
                 var route = 'foobar';
                 expect(function () {
                     clRouterProvider.getRoute(route);
-                }).toThrow('Unknown route "' + route + '".');
+                }).toThrow(new Error('Unknown route "' + route + '".'));
             });
 
             it('should return the provided config object (a copy).', function () {
@@ -165,7 +165,7 @@ describe('ng.cl.router', function () {
                 var route = 'foobar';
                 expect(function () {
                     clRouter.getRoute(route);
-                }).toThrow('Unknown route "' + route + '".');
+                }).toThrow(new Error('Unknown route "' + route + '".'));
             }));
 
             it('should return the route config.', inject(function (clRouter) {
@@ -187,7 +187,7 @@ describe('ng.cl.router', function () {
                 var route = 'foobar';
                 expect(function () {
                     clRouter.getURL(route);
-                }).toThrow('Unknown route "' + route + '".');
+                }).toThrow(new Error('Unknown route "' + route + '".'));
             }));
 
             it('should return the URL location, when no parameters are required.', inject(function (clRouter) {
@@ -207,7 +207,7 @@ describe('ng.cl.router', function () {
                 var key = 'quux';
                 expect(function () {
                     clRouter.getURL(route, {});
-                }).toThrow('Missing parameter "' + key + '" when building URL for route "' + route + '".');
+                }).toThrow(new Error('Missing parameter "' + key + '" when building URL for route "' + route + '".'));
             }));
 
             it('should NOT throw an error if an optional parameter is missing. ', inject(function (clRouter) {
@@ -236,7 +236,7 @@ describe('ng.cl.router', function () {
                 var route = 'foobar';
                 expect(function () {
                     clRouter.goTo(route);
-                }).toThrow('Unknown route "' + route + '".');
+                }).toThrow(new Error('Unknown route "' + route + '".'));
             }));
 
             it('should invoke "$location.url()" with the URL location, when no parameters are required.', inject(function (clRouter) {
@@ -256,11 +256,10 @@ describe('ng.cl.router', function () {
                 var key = 'quux';
                 expect(function () {
                     clRouter.goTo(route, {});
-                }).toThrow('Missing parameter "' + key + '" when building URL for route "' + route + '".');
+                }).toThrow(new Error('Missing parameter "' + key + '" when building URL for route "' + route + '".'));
             }));
 
         });
     });
 
 });
-
