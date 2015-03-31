@@ -4,37 +4,37 @@
 
 ## Routing
 
-In this example we will add a couple of **named** routes to `$routeProvider` via the `clRouterProvider` wrapper.
+In this example we will add a couple of **named** routes to `$routeProvider` via the `corkRouterProvider` wrapper.
 
 <doc:example module="exampleApp" height="200">
     <doc:source>
         <script>
-            angular.module('exampleApp', ['ngRoute', 'ng.cl.router'])
-            .config(['$locationProvider', 'clRouterProvider', function ($locationProvider, clRouterProvider) {
+            angular.module('exampleApp', ['ngRoute', 'ng.cork.router'])
+            .config(['$locationProvider', 'corkRouterProvider', function ($locationProvider, corkRouterProvider) {
                 //$locationProvider.html5Mode(false);
-                clRouterProvider.addRoute('foo', {
+                corkRouterProvider.addRoute('foo', {
                     path: '/foo',
                     controller: 'fooCtrl',
                     template: 'welcome to foo'
                 });
-                clRouterProvider.addRoute('bar', {
+                corkRouterProvider.addRoute('bar', {
                     path: '/bar/:id',
                     controller: 'barCtrl',
                     template: 'welcome to bar {{id}}'
                 });
             }])
-            .controller('exampleCtrl', ['$scope', 'clRouter', function ($scope, clRouter) {
-                $scope.router = clRouter;
+            .controller('exampleCtrl', ['$scope', 'corkRouter', function ($scope, corkRouter) {
+                $scope.router = corkRouter;
                 $scope.goToBar = function () {
-                    clRouter.goTo('bar', {id: $scope.id});
+                    corkRouter.goTo('bar', {id: $scope.id});
                 }
             }])
-            .controller('fooCtrl', ['$scope', 'clRouter', function ($scope, clRouter) {
+            .controller('fooCtrl', ['$scope', 'corkRouter', function ($scope, corkRouter) {
                 // ... controller code
             }])
-            .controller('barCtrl', ['$scope', 'clRouter', function ($scope, clRouter) {
+            .controller('barCtrl', ['$scope', 'corkRouter', function ($scope, corkRouter) {
                 // ... controller code
-                $scope.id = clRouter.$params.id;
+                $scope.id = corkRouter.$params.id;
             }]);
         </script>
         <style>

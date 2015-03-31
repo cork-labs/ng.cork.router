@@ -6,5 +6,5 @@
 
 #### Features
 
-* **routing:** renames "pattern" to "path", "gotoRoute" to "goTo" ([03c6627f](https://github.com/cork-labs/ng.cl.router/commit/03c6627f4bbb90d24ef4cebd246c28ddcc0671fa))
+* **routing:** renames "pattern" to "path", "gotoRoute" to "goTo" ([03c6627f](https://github.com/cork-labs/ng.cork.router/commit/03c6627f4bbb90d24ef4cebd246c28ddcc0671fa))
 

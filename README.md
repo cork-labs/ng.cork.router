@@ -1,29 +1,29 @@
-# ng.cl.router
-[![Build Status: Linux](http://img.shields.io/travis/cork-labs/ng.cl.router/master.svg?style=flat-square)](https://travis-ci.org/cork-labs/ng.cl.router)
-[![Bower version](http://img.shields.io/bower/v/ng.cl.router.svg?style=flat-square)](https://github.com/cork-labs/ng.cl.router)
+# ng.cork.router
+[![Build Status: Linux](http://img.shields.io/travis/cork-labs/ng.cork.router/master.svg?style=flat-square)](https://travis-ci.org/cork-labs/ng.cork.router)
+[![Bower version](http://img.shields.io/bower/v/ng.cork.router.svg?style=flat-square)](https://github.com/cork-labs/ng.cork.router)
 
 > AngularJS $router wrapper, provides navigation helpers.
 
 
 ## Getting Started
 
-Add **ng.cl.router** to you project.
+Add **ng.cork.router** to you project.
 
 Via bower:
 
 ```
-$ bower install --save ng.cl.router
+$ bower install --save ng.cork.router
 ```
 
 Include the following JS files in your build:
-- `dist/ng.cl.router.js` OR `dist/ng.cl.router.min.js`
+- `dist/ng.cork.router.js` OR `dist/ng.cork.router.min.js`
 
 
 ## Documentation
 
-Make sure to check the [official documentation](http://jarvis.cork-labs.org/ng.cl.router/current/docs) where you can find a
-[guide](http://jarvis.cork-labs.org/ng.cl.router/current/docs/#/guide), a few [demos](http://jarvis.cork-labs.org/ng.cl.router/current/docs/#/demos) and the complete
-[API reference](http://jarvis.cork-labs.org/ng.cl.router/current/docs/#/docs).
+Make sure to check the [official documentation](http://jarvis.cork-labs.org/ng.cork.router/current/docs) where you can find a
+[guide](http://jarvis.cork-labs.org/ng.cork.router/current/docs/#/guide), a few [demos](http://jarvis.cork-labs.org/ng.cork.router/current/docs/#/demos) and the complete
+[API reference](http://jarvis.cork-labs.org/ng.cork.router/current/docs/#/docs).
 
 
 ## Contributing

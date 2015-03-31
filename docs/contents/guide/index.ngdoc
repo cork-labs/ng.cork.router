@@ -2,33 +2,33 @@
 @name Guide
 @description
 
-# ng.cl.router
+# ng.cork.router
 
-[![Build Status: Linux](http://img.shields.io/travis/cork-labs/ng.cl.router/master.svg?style=flat-square)](https://travis-ci.org/cork-labs/ng.cl.router)
-[![Bower version](http://img.shields.io/bower/v/ng.cl.router.svg?style=flat-square)](https://github.com/cork-labs/ng.cl.router)
+[![Build Status: Linux](http://img.shields.io/travis/cork-labs/ng.cork.router/master.svg?style=flat-square)](https://travis-ci.org/cork-labs/ng.cork.router)
+[![Bower version](http://img.shields.io/bower/v/ng.cork.router.svg?style=flat-square)](https://github.com/cork-labs/ng.cork.router)
 
 > AngularJS $router wrapper, provides navigation helpers
 
 
 ## Getting Started
 
-Add **ng.cl.router** to you project.
+Add **ng.cork.router** to you project.
 
 Via bower:
 
 ```
-$ bower install --save ng.cl.router
+$ bower install --save ng.cork.router
 ```
 
 Include the following JS files in your build:
-- `dist/ng.cl.router.js` OR `dist/ng.cl.router.min.js`
+- `dist/ng.cork.router.js` OR `dist/ng.cork.router.min.js`
 
 
 ## Contributing
 
 We'd love for you to contribute to our source code and to make it even better than it is today!
 
-Make sure you read the [Contributing Guide](https://github.com/cork-labs/ng.cl.router/blob/master/CONTRIBUTING.md) first.
+Make sure you read the [Contributing Guide](https://github.com/cork-labs/ng.cork.router/blob/master/CONTRIBUTING.md) first.
 
 
 ## Developing

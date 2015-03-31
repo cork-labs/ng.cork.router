@@ -1,15 +1,15 @@
-describe('ng.cl.router', function () {
+describe('ng.cork.router', function () {
     'use strict';
 
-    beforeEach(module('ng.cl.router'));
+    beforeEach(module('ng.cork.router'));
 
     describe('provider', function () {
 
         describe('addRoute()', function () {
 
-            var clRouterProvider;
-            beforeEach(module(function (_clRouterProvider_) {
-                clRouterProvider = _clRouterProvider_;
+            var corkRouterProvider;
+            beforeEach(module(function (_corkRouterProvider_) {
+                corkRouterProvider = _corkRouterProvider_;
             }));
 
             // kickstart the injector http://stackoverflow.com/questions/15391683/how-can-i-test-a-angularjs-provider
@@ -17,24 +17,24 @@ describe('ng.cl.router', function () {
 
             it('should throw an error if name is missing.', function () {
                 expect(function () {
-                    clRouterProvider.addRoute();
+                    corkRouterProvider.addRoute();
                 }).toThrow(new Error('Invalid route name "undefined".'));
             });
 
             it('should throw an error if name is invalid.', function () {
                 var route = {};
                 expect(function () {
-                    clRouterProvider.addRoute(route);
+                    corkRouterProvider.addRoute(route);
                 }).toThrow(new Error('Invalid route name "' + route + '".'));
             });
 
             it('should throw an error if route has a repeated name.', function () {
                 var route = 'list';
                 expect(function () {
-                    clRouterProvider.addRoute(route, {
+                    corkRouterProvider.addRoute(route, {
                         path: '/foo'
                     });
-                    clRouterProvider.addRoute(route);
+                    corkRouterProvider.addRoute(route);
                 }).toThrow(new Error('Duplicate route "' + route + '".'));
             });
 
@@ -42,7 +42,7 @@ describe('ng.cl.router', function () {
                 var route = 'foo';
                 var config = 'bar';
                 expect(function () {
-                    clRouterProvider.addRoute(route, config);
+                    corkRouterProvider.addRoute(route, config);
                 }).toThrow(new Error('Invalid config "' + config + '" in route "' + route + '".'));
             });
 
@@ -50,7 +50,7 @@ describe('ng.cl.router', function () {
                 var route = 'foo';
                 var path;
                 expect(function () {
-                    clRouterProvider.addRoute(route, {});
+                    corkRouterProvider.addRoute(route, {});
                 }).toThrow(new Error('Invalid path "' + path + '" in route "' + route + '".'));
             });
 
@@ -58,7 +58,7 @@ describe('ng.cl.router', function () {
                 var route = 'foo';
                 var path = {};
                 expect(function () {
-                    clRouterProvider.addRoute(route, {
+                    corkRouterProvider.addRoute(route, {
                         path: path
                     });
                 }).toThrow(new Error('Invalid path "' + path + '" in route "' + route + '".'));
@@ -70,15 +70,15 @@ describe('ng.cl.router', function () {
         // chance to setup the injector
         describe('$routeProvider.when()', function () {
 
-            var clRouterProvider;
+            var corkRouterProvider;
             var $mockRouteProvider;
             beforeEach(module(function ($provide) {
                 // mock $routeProviderMock
                 $mockRouteProvider = jasmine.createSpyObj('$RouteProvider', ['when', '$get']);
                 $provide.provider('$routeProvider', $mockRouteProvider);
             }));
-            beforeEach(module(function (_clRouterProvider_) {
-                clRouterProvider = _clRouterProvider_;
+            beforeEach(module(function (_corkRouterProvider_) {
+                corkRouterProvider = _corkRouterProvider_;
             }));
 
             // kickstart the injector http://stackoverflow.com/questions/15391683/how-can-i-test-a-angularjs-provider
@@ -94,16 +94,16 @@ describe('ng.cl.router', function () {
                     path: 'bar',
                     template: 'baz'
                 };
-                clRouterProvider.addRoute(route, config);
+                corkRouterProvider.addRoute(route, config);
                 //expect($mockRouteProvider.when).toHaveBeenCalledWith(expected);
             });
         });
 
         describe('getRoute()', function () {
 
-            var clRouterProvider;
-            beforeEach(module(function (_clRouterProvider_) {
-                clRouterProvider = _clRouterProvider_;
+            var corkRouterProvider;
+            beforeEach(module(function (_corkRouterProvider_) {
+                corkRouterProvider = _corkRouterProvider_;
             }));
 
             // kickstart the injector http://stackoverflow.com/questions/15391683/how-can-i-test-a-angularjs-provider
@@ -112,7 +112,7 @@ describe('ng.cl.router', function () {
             it('should throw an error if route is unknown.', function () {
                 var route = 'foobar';
                 expect(function () {
-                    clRouterProvider.getRoute(route);
+                    corkRouterProvider.getRoute(route);
                 }).toThrow(new Error('Unknown route "' + route + '".'));
             });
 
@@ -126,9 +126,9 @@ describe('ng.cl.router', function () {
                     path: 'foobar'
                 };
 
-                clRouterProvider.addRoute(route, config);
+                corkRouterProvider.addRoute(route, config);
 
-                var obj = clRouterProvider.getRoute(route);
+                var obj = corkRouterProvider.getRoute(route);
                 expect(obj).not.toBe(config);
                 expect(typeof obj).toBe('object');
                 expect(obj.name).toEqual(expected.name);
@@ -139,42 +139,42 @@ describe('ng.cl.router', function () {
 
     describe('service', function () {
 
-        var clRouterProvider;
-        beforeEach(module(function (_clRouterProvider_) {
-            var clRouterProvider = _clRouterProvider_;
-            clRouterProvider.addRoute('foo', {
+        var corkRouterProvider;
+        beforeEach(module(function (_corkRouterProvider_) {
+            var corkRouterProvider = _corkRouterProvider_;
+            corkRouterProvider.addRoute('foo', {
                 path: '/bar'
             });
 
-            clRouterProvider.addRoute('bar', {
+            corkRouterProvider.addRoute('bar', {
                 path: '/qux/:quux'
             });
 
-            clRouterProvider.addRoute('baz', {
+            corkRouterProvider.addRoute('baz', {
                 path: '/qux/:quux?/quuux'
             });
 
-            clRouterProvider.addRoute('qux', {
+            corkRouterProvider.addRoute('qux', {
                 path: '/qux/:quux*/quuux'
             });
         }));
 
         describe('getRoute()', function () {
 
-            it('should throw an error if route is unknown.', inject(function (clRouter) {
+            it('should throw an error if route is unknown.', inject(function (corkRouter) {
                 var route = 'foobar';
                 expect(function () {
-                    clRouter.getRoute(route);
+                    corkRouter.getRoute(route);
                 }).toThrow(new Error('Unknown route "' + route + '".'));
             }));
 
-            it('should return the route config.', inject(function (clRouter) {
+            it('should return the route config.', inject(function (corkRouter) {
                 var route = 'bar';
                 var expected = {
                     name: 'bar',
                     path: '/qux/:quux'
                 };
-                var obj = clRouter.getRoute(route);
+                var obj = corkRouter.getRoute(route);
                 expect(typeof obj).toBe('object');
                 expect(obj.name).toEqual(expected.name);
                 expect(obj.path).toEqual(expected.path);
@@ -183,40 +183,40 @@ describe('ng.cl.router', function () {
 
         describe('getURL()', function () {
 
-            it('should throw an error if route is unknown.', inject(function (clRouter) {
+            it('should throw an error if route is unknown.', inject(function (corkRouter) {
                 var route = 'foobar';
                 expect(function () {
-                    clRouter.getURL(route);
+                    corkRouter.getURL(route);
                 }).toThrow(new Error('Unknown route "' + route + '".'));
             }));
 
-            it('should return the URL location, when no parameters are required.', inject(function (clRouter) {
-                var url = clRouter.getURL('foo');
+            it('should return the URL location, when no parameters are required.', inject(function (corkRouter) {
+                var url = corkRouter.getURL('foo');
                 expect(url).toBe('/bar');
             }));
 
-            it('should build the URL location, given the required parameters.', inject(function (clRouter) {
-                var url = clRouter.getURL('bar', {
+            it('should build the URL location, given the required parameters.', inject(function (corkRouter) {
+                var url = corkRouter.getURL('bar', {
                     quux: 'corge'
                 });
                 expect(url).toBe('/qux/corge');
             }));
 
-            it('should throw an error if a required parameter is missing. ', inject(function (clRouter) {
+            it('should throw an error if a required parameter is missing. ', inject(function (corkRouter) {
                 var route = 'bar';
                 var key = 'quux';
                 expect(function () {
-                    clRouter.getURL(route, {});
+                    corkRouter.getURL(route, {});
                 }).toThrow(new Error('Missing parameter "' + key + '" when building URL for route "' + route + '".'));
             }));
 
-            it('should NOT throw an error if an optional parameter is missing. ', inject(function (clRouter) {
-                var url = clRouter.getURL('baz', {});
+            it('should NOT throw an error if an optional parameter is missing. ', inject(function (corkRouter) {
+                var url = corkRouter.getURL('baz', {});
                 expect(url).toBe('/qux/quuux');
             }));
 
-            it('should also replace symbol for greedy parameters. ', inject(function (clRouter) {
-                var url = clRouter.getURL('qux', {
+            it('should also replace symbol for greedy parameters. ', inject(function (corkRouter) {
+                var url = corkRouter.getURL('qux', {
                     quux: 'corge'
                 });
                 expect(url).toBe('/qux/corge/quuux');
@@ -232,30 +232,30 @@ describe('ng.cl.router', function () {
                 $provide.value('$location', $locationMock);
             }));
 
-            it('should throw an error if route is unknown.', inject(function (clRouter) {
+            it('should throw an error if route is unknown.', inject(function (corkRouter) {
                 var route = 'foobar';
                 expect(function () {
-                    clRouter.goTo(route);
+                    corkRouter.goTo(route);
                 }).toThrow(new Error('Unknown route "' + route + '".'));
             }));
 
-            it('should invoke "$location.url()" with the URL location, when no parameters are required.', inject(function (clRouter) {
-                clRouter.goTo('foo');
+            it('should invoke "$location.url()" with the URL location, when no parameters are required.', inject(function (corkRouter) {
+                corkRouter.goTo('foo');
                 expect($locationMock.url).toHaveBeenCalledWith('/bar');
             }));
 
-            it('should invoke "$location.url()" with the built URL location, given the required parameters.', inject(function (clRouter) {
-                clRouter.goTo('bar', {
+            it('should invoke "$location.url()" with the built URL location, given the required parameters.', inject(function (corkRouter) {
+                corkRouter.goTo('bar', {
                     quux: 'corge'
                 });
                 expect($locationMock.url).toHaveBeenCalledWith('/qux/corge');
             }));
 
-            it('should throw an error if a required parameter is missing. ', inject(function (clRouter) {
+            it('should throw an error if a required parameter is missing. ', inject(function (corkRouter) {
                 var route = 'bar';
                 var key = 'quux';
                 expect(function () {
-                    clRouter.goTo(route, {});
+                    corkRouter.goTo(route, {});
                 }).toThrow(new Error('Missing parameter "' + key + '" when building URL for route "' + route + '".'));
             }));
 

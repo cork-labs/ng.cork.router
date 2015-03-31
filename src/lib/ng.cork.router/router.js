@@ -1,26 +1,26 @@
 (function (angular) {
     'use strict';
 
-    var module = angular.module('ng.cl.router', [
+    var module = angular.module('ng.cork.router', [
         'ngRoute'
     ]);
 
     /**
      * @ngdoc object
-     * @name ng.cl.router.clRouterProvider
+     * @name ng.cork.router.corkRouterProvider
      *
      * @dependencies
      * - ngRoute
      *
      * @description
-     * Allows the {@link ng.cl.router.clRouter clRouter} service to be configured and routes to be registered in `$routeProvider` during the config phase of the application.
+     * Allows the {@link ng.cork.router.corkRouter corkRouter} service to be configured and routes to be registered in `$routeProvider` during the config phase of the application.
      * config phase of your application.
      *
-     * @property {Object} $routeProvider Reference to AngularJS `$routeProvider` provider. Avoids having to inject both `clRouterProvider` and `$routeProvider` in case you need some underlying feature like `$route.current`.
+     * @property {Object} $routeProvider Reference to AngularJS `$routeProvider` provider. Avoids having to inject both `corkRouterProvider` and `$routeProvider` in case you need some underlying feature like `$route.current`.
      */
-    module.provider('clRouter', [
+    module.provider('corkRouter', [
         '$routeProvider',
-        function clRouterProvider($routeProvider) {
+        function corkRouterProvider($routeProvider) {
 
             /**
              * stores unique route objects
@@ -117,10 +117,10 @@
             /**
              * @ngdoc method
              * @name addRoute
-             * @methodOf ng.cl.router.clRouterProvider
+             * @methodOf ng.cork.router.corkRouterProvider
              *
              * @description
-             * Registers the route in both angular `$routeProvider` and the {@link ng.cl.router.clRouterProvider clRouterProvider} provider.
+             * Registers the route in both angular `$routeProvider` and the {@link ng.cork.router.corkRouterProvider corkRouterProvider} provider.
              *
              * @param {string} route  The route name.
              * @param {object} config The $routeProvider object, extended with a `path` attribute that corresponds to the `path` argument to {@link https://docs.angularjs.org/api/ngRoute/provider/$routeProvider#when $routeProvider:when()}.
@@ -130,7 +130,7 @@
             /**
              * @ngdoc method
              * @name getRoute
-             * @methodOf ng.cl.router.clRouterProvider
+             * @methodOf ng.cork.router.corkRouterProvider
              *
              * @description
              * Returns the route configuration.
@@ -144,7 +144,7 @@
             /**
              * @ngdoc method
              * @name getRoute
-             * @methodOf ng.cl.router.clRouterProvider
+             * @methodOf ng.cork.router.corkRouterProvider
              *
              * @description
              * Returns the route configuration.
@@ -160,29 +160,29 @@
 
             /**
              * @ngdoc service
-             * @name ng.cl.router.clRouter
+             * @name ng.cork.router.corkRouter
              *
              * @description
              * Provides methods to build and retrieive route paths and a navigation helper to trigger route changes by name.
              *
-             * @property {Object} $route  Reference to AngularJS `$route` service. Avoids having to inject both `clRouter` and `$route` in case you need some underlying feature like `$route.current`.
-             * @property {Object} $params Reference to AngularJS `$routeParams` service. Avoids having to inject both `clRouter` and `$routeParams`.
+             * @property {Object} $route  Reference to AngularJS `$route` service. Avoids having to inject both `corkRouter` and `$route` in case you need some underlying feature like `$route.current`.
+             * @property {Object} $params Reference to AngularJS `$routeParams` service. Avoids having to inject both `corkRouter` and `$routeParams`.
              */
             this.$get = [
                 '$route',
                 '$routeParams',
                 '$location',
-                function clRouter($route, $routeParams, $location) {
+                function corkRouter($route, $routeParams, $location) {
 
                     var serviceApi = {
 
                         /**
                          * @ngdoc method
                          * @name addRoute
-                         * @methodOf ng.cl.router.clRouter
+                         * @methodOf ng.cork.router.corkRouter
                          *
                          * @description
-                         * Registers the route in both angular `$routeProvider` and the {@link clRouterProvider} provider.
+                         * Registers the route in both angular `$routeProvider` and the {@link corkRouterProvider} provider.
                          *
                          * @param {string}  route  The name of the route.
                          * @param {object} config The $routeProvider object, extended with a `path` attribute that corresponds to the `path` argument to {@link https://docs.angularjs.org/api/ngRoute/provider/$routeProvider#when $routeProvider:when()}.
@@ -192,7 +192,7 @@
                         /**
                          * @ngdoc method
                          * @name getRoute
-                         * @methodOf ng.cl.router.clRouter
+                         * @methodOf ng.cork.router.corkRouter
                          *
                          * @description
                          * Returns the route configuration.
@@ -206,7 +206,7 @@
                         /**
                          * @ngdoc method
                          * @name getURL
-                         * @methodOf ng.cl.router.clRouter
+                         * @methodOf ng.cork.router.corkRouter
                          *
                          * @description
                          * Builds the URL for a route, given the provided params.
@@ -223,7 +223,7 @@
                         /**
                          * @ngdoc method
                          * @name goTo
-                         * @methodOf ng.cl.router.clRouter
+                         * @methodOf ng.cork.router.corkRouter
                          *
                          * @description
                          * Navigates to a route, given the provided params and

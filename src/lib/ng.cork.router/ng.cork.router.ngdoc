@@ -1,0 +1,48 @@
+@ngdoc overview
+@name ng.cork.router
+@description
+
+> AngularJS $router wrapper, provides navigation helpers.
+
+# Dependencies
+
+- Service `ngRoute`, provided by [bower:angular-route](https://github.com/angular/bower-angular-route)
+
+
+# Usage
+
+Add this module as a dependency of your modules.
+
+<pre>
+angular.module('app', ['ng.cork.router']);
+</pre>
+
+
+## [corkRouter](#/api/ng.cork.prevent-nav.corkRouterProvider) Service Configuration
+
+Configure the {@link ng.cork.router.corkRouter corkRouter} service by invoking `configure()` on the {@link ng.cork.router.corkRouterProvider corkRouterProvider}
+provider during the config phase of your app.
+
+<pre>
+angular.module('someModule', ['ng.cork.router'])
+.config(['corkRouterProvider', function (corkRouterProvider) {
+    corkRouterProvider.addRoute('foo', {
+        pattern: '/foo/:id',
+        controller: 'fooController'
+    });
+}])
+</pre>
+
+
+
+## [corkRouter](#/api/ng.cork.prevent-nav.corkRouter) Service
+
+Use the {@link ng.cork.router.corkRouter corkRouter} service by injecting it into your controllers or services.
+
+<pre>
+angular.module('someModule', ['ng.cork.router'])
+.controller('someController', ['corkRouter', function (corkRouter) {
+    corkRouter.goTo('foo', {id: 42});
+}])
+</pre>
+

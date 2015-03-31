@@ -2,13 +2,13 @@
 @name API Reference
 @description
 
-# ng.cl.router API Reference
+# ng.cork.router API Reference
 
-> Welcome to the **ng.cl.router** API reference.
+> Welcome to the **ng.cork.router** API reference.
 
-If you want to know how **ng.cl.router** works, checkout the {@link guide/ guide} and the {@link demos/ demos}.
+If you want to know how **ng.cork.router** works, checkout the {@link guide/ guide} and the {@link demos/ demos}.
 
 
 ## Modules
 
-- **[ng.cl.router](#/api/ng.cl.router)** - AngularJS $router wrapper, provides navigation helpers.
+- **[ng.cork.router](#/api/ng.cork.router)** - AngularJS $router wrapper, provides navigation helpers.

@@ -144,7 +144,7 @@ module.exports = function (grunt, data) {
 
             // used in the name of the template module (results in "my.module.templates")
             // as well as filenames of dist files
-            ngNamespace: 'ng.cl.router',
+            ngNamespace: 'ng.cork.router',
 
             // -- docs related
 
@@ -169,7 +169,7 @@ module.exports = function (grunt, data) {
                 examplesScripts: [
                     '<%= paths.vendor %>/angular/angular.js',
                     '<%= paths.vendor %>/angular-route/angular-route.js',
-                    'src/lib/<%= vars.ngNamespace %>/<%= vars.ngNamespace %>.js',
+                    'src/lib/<%= vars.ngNamespace %>/router.js',
 
                 ],
                 examplesStyles: [

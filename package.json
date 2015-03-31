@@ -1,5 +1,5 @@
 {
-  "name": "ng.cl.router",
+  "name": "ng.cork.router",
   "version": "0.0.5",
   "description": "AngularJS $router wrapper, provides navigation helpers",
   "author": {
@@ -16,11 +16,11 @@
     "angularjs",
     "router"
   ],
-  "homepage": "https://github.com/cork-labs/ng.cl.router",
-  "bugs": "https://github.com/cork-labs/ng.cl.router/issues",
+  "homepage": "https://github.com/cork-labs/ng.cork.router",
+  "bugs": "https://github.com/cork-labs/ng.cork.router/issues",
   "repository": {
     "type": "git",
-    "url": "git@github.com:cork-labs/ng.cl.router.git"
+    "url": "git@github.com:cork-labs/ng.cork.router.git"
   },
   "readmeFilename": "README.md",
   "dependencies": {
