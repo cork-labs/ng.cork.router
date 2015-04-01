@@ -25,12 +25,15 @@ provider during the config phase of your app.
 
 <pre>
 angular.module('someModule', ['ng.cork.router'])
-.config(['corkRouterProvider', function (corkRouterProvider) {
-    corkRouterProvider.addRoute('foo', {
-        pattern: '/foo/:id',
-        controller: 'fooController'
-    });
-}])
+.config([
+    'corkRouterProvider',
+    function (corkRouterProvider) {
+        corkRouterProvider.addRoute('foo', {
+            pattern: '/foo/:id',
+            controller: 'fooController'
+        });
+    }
+])
 </pre>
 
 
@@ -41,8 +44,11 @@ Use the {@link ng.cork.router.corkRouter corkRouter} service by injecting it int
 
 <pre>
 angular.module('someModule', ['ng.cork.router'])
-.controller('someController', ['corkRouter', function (corkRouter) {
-    corkRouter.goTo('foo', {id: 42});
-}])
+.controller('myController', [
+    'corkRouter',
+    function (corkRouter) {
+        corkRouter.goTo('foo', {id: 42});
+    }
+])
 </pre>
 
