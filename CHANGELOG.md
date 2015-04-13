@@ -1,3 +1,11 @@
+<a name="v0.0.9"></a>
+### v0.0.9 (2015-04-14)
+
+
+#### Bug Fixes
+
+* **getUrl:** optional params not treated as such if also greedy ([6e361710](git@github.com:cork-labs/ng.cork.router/commit/6e361710aae8a269aec40abbe15f80cfd20feea2))
+
 <a name="v0.0.8"></a>
 ### v0.0.8 (2015-04-14)
 
