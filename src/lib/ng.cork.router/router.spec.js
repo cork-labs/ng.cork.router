@@ -45,7 +45,7 @@ describe('ng.cork.router', function () {
                 var params = 'bar';
                 expect(function () {
                     corkRouterProvider.addRoute(route, params);
-                }).toThrow(new Error('Invalid params "' + params + '" in route "' + route + '".'));
+                }).toThrow(new Error('Invalid params for route "' + route + '".'));
             });
 
             it('should throw an error if path is missing.', function () {
@@ -53,7 +53,7 @@ describe('ng.cork.router', function () {
                 var path;
                 expect(function () {
                     corkRouterProvider.addRoute(route, {});
-                }).toThrow(new Error('Invalid path "' + path + '" in route "' + route + '".'));
+                }).toThrow(new Error('Invalid path for route "' + route + '".'));
             });
 
             it('should throw an error if path is invalid.', function () {
@@ -63,7 +63,7 @@ describe('ng.cork.router', function () {
                     corkRouterProvider.addRoute(route, {
                         path: path
                     });
-                }).toThrow(new Error('Invalid path "' + path + '" in route "' + route + '".'));
+                }).toThrow(new Error('Invalid path for route "' + route + '".'));
             });
 
             it('should register the route in the $routeProvider.', function () {
@@ -80,7 +80,8 @@ describe('ng.cork.router', function () {
                     name: 'foo'
                 };
                 corkRouterProvider.addRoute(route, params);
-                expect(whenSpy).toHaveBeenCalledWith(params.path, expected);
+
+                expect(whenSpy).toHaveBeenCalledWith('/foo', expected);
             });
         });
 

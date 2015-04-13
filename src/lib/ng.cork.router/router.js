@@ -46,11 +46,12 @@
                 }
 
                 if (!angular.isObject(params)) {
-                    throw new Error('Invalid params "' + params + '" in route "' + name + '".');
+                    throw new Error('Invalid params for route "' + name + '".');
                 }
 
-                if (!isString(params.path) || !params.path.length) {
-                    throw new Error('Invalid path "' + params.path + '" in route "' + name + '".');
+                var path = params.path;
+                if (!isString(path) || !path.length) {
+                    throw new Error('Invalid path for route "' + name + '".');
                 }
 
                 params.name = name;
@@ -58,8 +59,9 @@
 
                 // register the route
                 if (params.controller || params.template || params.templateUrl) {
+                    params = angular.copy(params);
                     delete params.path;
-                    $routeProvider.when(params.path, params);
+                    $routeProvider.when(path, params);
                 }
             };
 
