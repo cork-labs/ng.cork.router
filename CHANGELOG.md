@@ -1,3 +1,11 @@
+<a name="v0.0.7"></a>
+### v0.0.7 (2015-04-13)
+
+
+#### Features
+
+* **redirect:** adds redirectTo(), when(), otherwise() methods ([51890eeb](git@github.com:cork-labs/ng.cork.router/commit/51890eebe8e5ece4851dd36acd15f4299890c39b))
+
 <a name="v0.0.6"></a>
 ### v0.0.6 (2015-04-03)
 
