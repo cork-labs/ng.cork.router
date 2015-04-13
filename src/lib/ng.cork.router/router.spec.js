@@ -5,15 +5,17 @@ describe('ng.cork.router', function () {
 
     describe('provider', function () {
 
+        var $routeProvider;
+        var corkRouterProvider;
+        beforeEach(module(function (_$routeProvider_, _corkRouterProvider_) {
+            $routeProvider = _$routeProvider_;
+            corkRouterProvider = _corkRouterProvider_;
+        }));
+
+        // kickstart the injector http://stackoverflow.com/questions/15391683/how-can-i-test-a-angularjs-provider
+        beforeEach(inject(function ($route) {}));
+
         describe('addRoute()', function () {
-
-            var corkRouterProvider;
-            beforeEach(module(function (_corkRouterProvider_) {
-                corkRouterProvider = _corkRouterProvider_;
-            }));
-
-            // kickstart the injector http://stackoverflow.com/questions/15391683/how-can-i-test-a-angularjs-provider
-            beforeEach(inject(function ($route) {}));
 
             it('should throw an error if name is missing.', function () {
                 expect(function () {
@@ -38,12 +40,12 @@ describe('ng.cork.router', function () {
                 }).toThrow(new Error('Duplicate route "' + route + '".'));
             });
 
-            it('should throw an error if config is invalid.', function () {
+            it('should throw an error if "params" is invalid.', function () {
                 var route = 'foo';
-                var config = 'bar';
+                var params = 'bar';
                 expect(function () {
-                    corkRouterProvider.addRoute(route, config);
-                }).toThrow(new Error('Invalid config "' + config + '" in route "' + route + '".'));
+                    corkRouterProvider.addRoute(route, params);
+                }).toThrow(new Error('Invalid params "' + params + '" in route "' + route + '".'));
             });
 
             it('should throw an error if path is missing.', function () {
@@ -63,51 +65,66 @@ describe('ng.cork.router', function () {
                     });
                 }).toThrow(new Error('Invalid path "' + path + '" in route "' + route + '".'));
             });
-        });
 
-        // not covered because couldn't find a way to override the $routeProvider instance that the injector yields
-        // basically, azRouteProvider is instantiated, and injected with the real $routeProvider, before we get a
-        // chance to setup the injector
-        describe('$routeProvider.when()', function () {
+            it('should register the route in the $routeProvider.', function () {
 
-            var corkRouterProvider;
-            var $mockRouteProvider;
-            beforeEach(module(function ($provide) {
-                // mock $routeProviderMock
-                $mockRouteProvider = jasmine.createSpyObj('$RouteProvider', ['when', '$get']);
-                $provide.provider('$routeProvider', $mockRouteProvider);
-            }));
-            beforeEach(module(function (_corkRouterProvider_) {
-                corkRouterProvider = _corkRouterProvider_;
-            }));
+                var whenSpy = spyOn($routeProvider, 'when');
 
-            // kickstart the injector http://stackoverflow.com/questions/15391683/how-can-i-test-a-angularjs-provider
-            beforeEach(inject(function ($route) {}));
-
-            it('should be invoked if route contains "template" property.', function () {
-                var route = 'foo1';
-                var config = {
-                    path: 'bar',
-                    template: 'baz'
+                var route = 'foo';
+                var params = {
+                    path: '/foo',
+                    controller: 'bar'
                 };
                 var expected = {
-                    path: 'bar',
-                    template: 'baz'
+                    controller: 'bar',
+                    name: 'foo'
                 };
-                corkRouterProvider.addRoute(route, config);
-                //expect($mockRouteProvider.when).toHaveBeenCalledWith(expected);
+                corkRouterProvider.addRoute(route, params);
+                expect(whenSpy).toHaveBeenCalledWith(params.path, expected);
+            });
+        });
+
+        describe('addRedirect()', function () {
+
+            it('should register the route in the $routeProvider.', function () {
+
+                var whenSpy = spyOn($routeProvider, 'when');
+
+                var from = '/foo';
+                var to = '/bar';
+                var expected = {
+                    redirectTo: '/bar'
+                };
+                corkRouterProvider.addRedirect(from, to);
+                expect(whenSpy).toHaveBeenCalledWith(from, expected);
+            });
+        });
+
+        describe('$routeProvider', function () {
+
+            it('should expose the provider.', function () {
+
+                expect(corkRouterProvider.$routeProvider).toBe($routeProvider);
+            });
+        });
+
+        describe('when()', function () {
+
+            it('should expose the provider method.', function () {
+
+                expect(corkRouterProvider.when).toBe($routeProvider.when);
+            });
+        });
+
+        describe('otherwise', function () {
+
+            it('should expose the provider method.', function () {
+
+                expect(corkRouterProvider.otherwise).toBe($routeProvider.otherwise);
             });
         });
 
         describe('getRoute()', function () {
-
-            var corkRouterProvider;
-            beforeEach(module(function (_corkRouterProvider_) {
-                corkRouterProvider = _corkRouterProvider_;
-            }));
-
-            // kickstart the injector http://stackoverflow.com/questions/15391683/how-can-i-test-a-angularjs-provider
-            beforeEach(inject(function ($route) {}));
 
             it('should throw an error if route is unknown.', function () {
                 var route = 'foobar';
@@ -116,20 +133,22 @@ describe('ng.cork.router', function () {
                 }).toThrow(new Error('Unknown route "' + route + '".'));
             });
 
-            it('should return the provided config object (a copy).', function () {
+            it('should return the provided params object (a copy).', function () {
                 var route = 'foo';
-                var config = {
-                    path: 'foobar'
+                var params = {
+                    path: 'foobar',
+                    controller: 'baz'
                 };
                 var expected = {
                     name: route,
-                    path: 'foobar'
+                    path: 'foobar',
+                    controller: 'baz'
                 };
 
-                corkRouterProvider.addRoute(route, config);
+                corkRouterProvider.addRoute(route, params);
 
                 var obj = corkRouterProvider.getRoute(route);
-                expect(obj).not.toBe(config);
+                expect(obj).not.toBe(params);
                 expect(typeof obj).toBe('object');
                 expect(obj.name).toEqual(expected.name);
                 expect(obj.path).toEqual(expected.path);
@@ -139,9 +158,12 @@ describe('ng.cork.router', function () {
 
     describe('service', function () {
 
+        var $routeProvider;
         var corkRouterProvider;
-        beforeEach(module(function (_corkRouterProvider_) {
-            var corkRouterProvider = _corkRouterProvider_;
+        beforeEach(module(function (_$routeProvider_, _corkRouterProvider_) {
+            $routeProvider = _$routeProvider_;
+            corkRouterProvider = _corkRouterProvider_;
+
             corkRouterProvider.addRoute('foo', {
                 path: '/bar'
             });
@@ -159,25 +181,59 @@ describe('ng.cork.router', function () {
             });
         }));
 
+        describe('$route', function () {
+
+            it('should expose the service.', inject(function (corkRouter, $route) {
+
+                expect(corkRouter.$route).toBe($route);
+            }));
+        });
+
+        describe('$routeParams', function () {
+
+            it('should expose the service.', inject(function (corkRouter, $routeParams) {
+
+                expect(corkRouter.$params).toBe($routeParams);
+            }));
+        });
+
+        describe('addRoute()', function () {
+
+            it('should expose the provider method.', inject(function (corkRouter) {
+
+                expect(corkRouter.addRoute).toBe(corkRouterProvider.addRoute);
+            }));
+        });
+
+        describe('addRedirect()', function () {
+
+            it('should expose the provider method.', inject(function (corkRouter) {
+
+                expect(corkRouter.addRedirect).toBe(corkRouterProvider.addRedirect);
+            }));
+        });
+
         describe('getRoute()', function () {
 
-            it('should throw an error if route is unknown.', inject(function (corkRouter) {
-                var route = 'foobar';
-                expect(function () {
-                    corkRouter.getRoute(route);
-                }).toThrow(new Error('Unknown route "' + route + '".'));
-            }));
+            it('should expose the provider method.', inject(function (corkRouter) {
 
-            it('should return the route config.', inject(function (corkRouter) {
-                var route = 'bar';
-                var expected = {
-                    name: 'bar',
-                    path: '/qux/:quux'
-                };
-                var obj = corkRouter.getRoute(route);
-                expect(typeof obj).toBe('object');
-                expect(obj.name).toEqual(expected.name);
-                expect(obj.path).toEqual(expected.path);
+                expect(corkRouter.getRoute).toBe(corkRouterProvider.getRoute);
+            }));
+        });
+
+        describe('when()', function () {
+
+            it('should expose the provider method.', inject(function (corkRouter) {
+
+                expect(corkRouter.when).toBe($routeProvider.when);
+            }));
+        });
+
+        describe('otherwise', function () {
+
+            it('should expose the provider method.', inject(function (corkRouter) {
+
+                expect(corkRouter.otherwise).toBe($routeProvider.otherwise);
             }));
         });
 
