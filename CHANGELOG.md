@@ -1,3 +1,11 @@
+<a name="v0.0.8"></a>
+### v0.0.8 (2015-04-14)
+
+
+#### Bug Fixes
+
+* **addRoute:** path was being deleted ([1f907d85](git@github.com:cork-labs/ng.cork.router/commit/1f907d8570f43d3db76642cd2f05fdb34cdf523d))
+
 <a name="v0.0.7"></a>
 ### v0.0.7 (2015-04-13)
 

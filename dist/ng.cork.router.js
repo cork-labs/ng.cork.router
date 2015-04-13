@@ -1,5 +1,5 @@
 /**
- * ng.cork.router - v0.0.7 - 2015-04-13
+ * ng.cork.router - v0.0.8 - 2015-04-14
  * https://github.com/cork-labs/ng.cork.router
  *
  * Copyright (c) 2015 Cork Labs <http://cork-labs.org>
@@ -53,11 +53,12 @@
                 }
 
                 if (!angular.isObject(params)) {
-                    throw new Error('Invalid params "' + params + '" in route "' + name + '".');
+                    throw new Error('Invalid params for route "' + name + '".');
                 }
 
-                if (!isString(params.path) || !params.path.length) {
-                    throw new Error('Invalid path "' + params.path + '" in route "' + name + '".');
+                var path = params.path;
+                if (!isString(path) || !path.length) {
+                    throw new Error('Invalid path for route "' + name + '".');
                 }
 
                 params.name = name;
@@ -65,8 +66,9 @@
 
                 // register the route
                 if (params.controller || params.template || params.templateUrl) {
+                    params = angular.copy(params);
                     delete params.path;
-                    $routeProvider.when(params.path, params);
+                    $routeProvider.when(path, params);
                 }
             };
 
