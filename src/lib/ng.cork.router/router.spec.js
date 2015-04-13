@@ -177,6 +177,10 @@ describe('ng.cork.router', function () {
                 path: '/qux/:quux?/quuux'
             });
 
+            corkRouterProvider.addRoute('bazz', {
+                path: '/qux/:quux*?/quuux'
+            });
+
             corkRouterProvider.addRoute('qux', {
                 path: '/qux/:quux*/quuux'
             });
@@ -268,15 +272,20 @@ describe('ng.cork.router', function () {
             }));
 
             it('should NOT throw an error if an optional parameter is missing. ', inject(function (corkRouter) {
-                var url = corkRouter.getURL('baz', {});
+                var url = corkRouter.getURL('baz');
+                expect(url).toBe('/qux/quuux');
+            }));
+
+            it('should NOT throw an error if an optional parameter is missing (when parameter is greedy). ', inject(function (corkRouter) {
+                var url = corkRouter.getURL('bazz');
                 expect(url).toBe('/qux/quuux');
             }));
 
             it('should also replace symbol for greedy parameters. ', inject(function (corkRouter) {
                 var url = corkRouter.getURL('qux', {
-                    quux: 'corge'
+                    quux: 'corge/fox'
                 });
-                expect(url).toBe('/qux/corge/quuux');
+                expect(url).toBe('/qux/corge/fox/quuux');
             }));
         });
 

@@ -98,27 +98,33 @@
 
                 var url = getRoute(name).path;
                 var hasParam;
+                var isOptional;
+                var isGreedy;
                 var regexp;
                 var replace;
+                params = params || {};
 
-                url = url.replace(/(\/)?:(\w+)(\?|\*)?/g, function (result, slash, key, flag) {
+                url = url.replace(/(\/)?:(\w+)([\?\*]{1,2})?/g, function (result, slash, key, flags) {
                     hasParam = params.hasOwnProperty(key);
+                    isOptional = flags && flags.indexOf('?') !== -1;
+                    isGreedy = flags && flags.indexOf('*') !== -1;
+                    console.log(url, flags, isOptional, isGreedy);
                     // error on mandatory parameters
-                    if (flag !== '?' && !hasParam) {
+                    if (!isOptional && !hasParam) {
                         throw new Error('Missing parameter "' + key + '" when building URL for route "' + name + '".');
                     }
                     regexp = ':' + key;
+                    // greedy parameters
+                    if (isGreedy) {
+                        regexp += '\\*';
+                    }
                     // optional parameters
-                    if (flag === '?') {
+                    if (isOptional) {
                         regexp += '\\?';
                         // replace preceeding / if optional parameter is not provided
                         if (!hasParam || !params[key]) {
                             regexp = '\/' + regexp;
                         }
-                    }
-                    // greedy parameters
-                    else if (flag === '*') {
-                        regexp += '\\*';
                     }
                     replace = (hasParam && params[key]) || '';
                     return result.replace(new RegExp(regexp), replace);
