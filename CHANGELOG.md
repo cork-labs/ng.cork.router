@@ -1,3 +1,11 @@
+<a name="v0.0.10"></a>
+### v0.0.10 (2015-04-14)
+
+
+#### Features
+
+* **$$route:** exposes current $$route, when set ([c1bddc01](git@github.com:cork-labs/ng.cork.router/commit/c1bddc01868588f379261b1f78d6ee8c4746cb8e))
+
 <a name="v0.0.9"></a>
 ### v0.0.9 (2015-04-14)
 

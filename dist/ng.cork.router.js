@@ -1,5 +1,5 @@
 /**
- * ng.cork.router - v0.0.9 - 2015-04-14
+ * ng.cork.router - v0.0.10 - 2015-04-14
  * https://github.com/cork-labs/ng.cork.router
  *
  * Copyright (c) 2015 Cork Labs <http://cork-labs.org>
@@ -239,6 +239,7 @@
              * Provides methods to build and retrieive route paths and a navigation helper to trigger route changes by name.
              *
              * @property {Object} $route  Reference to [$route](https://docs.angularjs.org/api/ngRoute/service/$route) service. No need to inject both `corkRouter` and `$route` in case you need some underlying feature, such as `$route.current`.
+             * @property {Object} current  Reference to [$route.current.$$route](https://docs.angularjs.org/api/ngRoute/service/$route) service, when set.
              * @property {Object} $params Reference to [$routeParams](https://docs.angularjs.org/api/ngRoute/service/$routeParams) service. No need to inject both `corkRouter` and `$routeParams`.
              */
             this.$get = [
@@ -357,6 +358,12 @@
                     };
 
                     serviceApi.$route = $route;
+
+                    Object.defineProperty(serviceApi, '$$route', {
+                        get: function () {
+                            return $route.current && $route.current.$$route;
+                        }
+                    });
 
                     serviceApi.$params = $routeParams;
 
