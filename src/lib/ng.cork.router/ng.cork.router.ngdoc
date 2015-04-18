@@ -18,10 +18,11 @@ angular.module('app', ['ng.cork.router']);
 </pre>
 
 
-## [corkRouter](#/api/ng.cork.prevent-nav.corkRouterProvider) Service Configuration
+## [corkRouter](#/api/ng.cork.router.corkRouterProvider) Provider.
 
-Configure the {@link ng.cork.router.corkRouter corkRouter} service by invoking `configure()` on the {@link ng.cork.router.corkRouterProvider corkRouterProvider}
-provider during the config phase of your app.
+> **Not Recommended**: Add routes during `config` phase.
+
+Add routes during the `config` phase by invoking `addRoute()` on the {@link ng.cork.router.corkRouterProvider corkRouterProvider}.
 
 <pre>
 angular.module('someModule', ['ng.cork.router'])
@@ -33,12 +34,32 @@ angular.module('someModule', ['ng.cork.router'])
             controller: 'fooController'
         });
     }
-])
+]);
 </pre>
 
 
 
-## [corkRouter](#/api/ng.cork.prevent-nav.corkRouter) Service
+## [corkRouter](#/api/ng.cork.router.corkRouter) Service.
+
+> **Recommended**: Add routes in `run` phase or later.
+
+Use the {@link ng.cork.router.corkRouter corkRouter} service to add routes during the `run` phase.
+
+<pre>
+angular.module('someModule', ['ng.cork.router'])
+.config([
+    'run',
+    function (corkRouter) {
+        corkRouter.addRoute('foo', {
+            pattern: '/foo/:id',
+            controller: 'fooController'
+        });
+    }
+]);
+</pre>
+
+
+## [corkRouter](#/api/ng.cork.router.corkRouter) Service
 
 Use the {@link ng.cork.router.corkRouter corkRouter} service by injecting it into your controllers or services.
 
@@ -49,6 +70,6 @@ angular.module('someModule', ['ng.cork.router'])
     function (corkRouter) {
         corkRouter.goTo('foo', {id: 42});
     }
-])
+]);
 </pre>
 
