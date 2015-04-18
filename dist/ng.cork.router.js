@@ -149,7 +149,7 @@
              * Registers the route in both angular `$routeProvider` and the {@link ng.cork.router.corkRouterProvider corkRouterProvider} provider.
              *
              * @param {string} name  The route name.
-             * @param {object} params The underlying [$routeProvider.when](https://docs.angularjs.org/api/ngRoute/provider/$routeProvider#when $routeProvider.when) `route` and `path` arguments in a single object.
+             * @param {object} params The underlying [$routeProvider.when](https://docs.angularjs.org/api/ngRoute/provider/$routeProvider#when) `route` and `path` arguments in a single object.
              *
              * Ex:
              * ```
@@ -194,7 +194,7 @@
              * @methodOf ng.cork.router.corkRouterProvider
              *
              * @description
-             * Reference to [$routeProvider.otherwise()](https://docs.angularjs.org/api/ngRoute/provider/$routeProvider#otherwise $routeProvider.otherwise).
+             * Reference to [$routeProvider.otherwise()](https://docs.angularjs.org/api/ngRoute/provider/$routeProvider#otherwise).
              *
              * @param {object} params Mapping information to be assigned to $route.current. If called with a string, the value maps to redirectTo.
              */
@@ -239,7 +239,7 @@
              * Provides methods to build and retrieive route paths and a navigation helper to trigger route changes by name.
              *
              * @property {Object} $route  Reference to [$route](https://docs.angularjs.org/api/ngRoute/service/$route) service. No need to inject both `corkRouter` and `$route` in case you need some underlying feature, such as `$route.current`.
-             * @property {Object} current  Reference to [$route.current.$$route](https://docs.angularjs.org/api/ngRoute/service/$route) service, when set.
+             * @property {Object} current Reference to [$route.current.$$route](https://docs.angularjs.org/api/ngRoute/service/$route) service, when set.
              * @property {Object} $params Reference to [$routeParams](https://docs.angularjs.org/api/ngRoute/service/$routeParams) service. No need to inject both `corkRouter` and `$routeParams`.
              */
             this.$get = [
@@ -259,7 +259,7 @@
                          * Registers the route in both angular `$routeProvider` and the {@link corkRouterProvider} provider.
                          *
                          * @param {string} name  The name of the route.
-                         * @param {object} config The underlying [$routeProvider.when](https://docs.angularjs.org/api/ngRoute/provider/$routeProvider#when $routeProvider.when) `route` and `path` arguments in a single object.
+                         * @param {object} config The underlying [$routeProvider.when](https://docs.angularjs.org/api/ngRoute/provider/$routeProvider#when) `route` and `path` arguments in a single object.
                          *
                          * Ex:
                          * ```
@@ -291,7 +291,7 @@
                          * @methodOf ng.cork.router.corkRouter
                          *
                          * @description
-                         * Reference to [$routeProvider.when()](https://docs.angularjs.org/api/ngRoute/provider/$routeProvider#when $routeProvider.when).
+                         * Reference to [$routeProvider.when()](https://docs.angularjs.org/api/ngRoute/provider/$routeProvider#when).
                          *
                          * @param {string} path Route path (matched against $location.path).
                          * @param {object} route Mapping information to be assigned to $route.current on route match.
@@ -304,7 +304,7 @@
                          * @methodOf ng.cork.router.corkRouter
                          *
                          * @description
-                         * Reference to [$routeProvider.otherwise()](https://docs.angularjs.org/api/ngRoute/provider/$routeProvider#otherwise $routeProvider.otherwise).
+                         * Reference to [$routeProvider.otherwise()](https://docs.angularjs.org/api/ngRoute/provider/$routeProvider#otherwise).
                          *
                          * @param {object} params Mapping information to be assigned to $route.current. If called with a string, the value maps to redirectTo.
                          */
