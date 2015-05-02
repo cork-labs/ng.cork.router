@@ -1,3 +1,11 @@
+<a name="v0.0.12"></a>
+### v0.0.12 (2015-05-03)
+
+
+#### Bug Fixes
+
+* remove debug code ([c005469f](git@github.com:cork-labs/ng.cork.router/commit/c005469f9442321b2b4f2bdd3fe3524e4264eaea))
+
 <a name="v0.0.11"></a>
 ### v0.0.11 (2015-04-16)
 
