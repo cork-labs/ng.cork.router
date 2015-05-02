@@ -108,7 +108,6 @@
                     hasParam = params.hasOwnProperty(key);
                     isOptional = flags && flags.indexOf('?') !== -1;
                     isGreedy = flags && flags.indexOf('*') !== -1;
-                    console.log(url, flags, isOptional, isGreedy);
                     // error on mandatory parameters
                     if (!isOptional && !hasParam) {
                         throw new Error('Missing parameter "' + key + '" when building URL for route "' + name + '".');
