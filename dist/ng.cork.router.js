@@ -1,5 +1,5 @@
 /**
- * ng.cork.router - v0.0.12 - 2015-05-03
+ * ng.cork.router - v0.0.13 - 2015-05-11
  * https://github.com/cork-labs/ng.cork.router
  *
  * Copyright (c) 2015 Cork Labs <http://cork-labs.org>
